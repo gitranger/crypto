@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+  {% if notfound %}
+    <h10> {{ notfound }} </h10>
+
+  {% else %}
+
+    {% if crypto.Response == 'Error' %}
+        {{ crypto.Message }} <br/>
+        Probaby {{ quote }} crypto currency does not exist ...
+    {% endif %}
+
+    {% for key,value in crypto.DISPLAY.items %}
+      <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-10"> <img src= "https://www.cryptocompare.com{{ value.THB.IMAGEURL }}" alt="" style="width:30px; height:auto;">&nbsp;{{ key }}</h1>
+            <strong>Price</strong>:  {{ value.THB.PRICE }}<br/>
+            <strong>LowDay</strong>: {{ value.THB.LOWDAY }}<br/>
+            <strong>HighDay</strong>: {{ value.THB.HIGHDAY }}<br/>
+            <strong>Market Cap</strong>: {{ value.THB.MKTCAP}}<br/>
+        </div>
+      </div>
+    {% endfor %}
+
+  {% endif %}
+
+{% endblock %}
